@@ -17,9 +17,19 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static("public"));
 
 
+// mongoose.Promise = Promise;
+// mongoose.connect("mongodb://localhost/MongoHW", {
+//   useMongoClient: true
+// });
+
+const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/MongoHW";
+
+// Use promises with mongoose and connect to MongoDB
 mongoose.Promise = Promise;
-mongoose.connect("mongodb://localhost/MongoHW", {
+mongoose.connect(MONGODB_URI, {
   useMongoClient: true
+}).catch((error) => {
+  console.log(error);
 });
 
 // GET route for scraping
